@@ -1,7 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBreedsFromAPI, fetchTemperamentsFromAPI } from "../actions";
+import {
+  fetchBreedsFromAPI,
+  fetchTemperamentsFromAPI,
+  getFilters,
+} from "../actions";
 import { Link } from "react-router-dom";
 import Card from "./Card";
 import classes from "./Home.module.css";
@@ -11,30 +15,33 @@ const Home = () => {
   const dispatch = useDispatch();
   const allBreeds = useSelector((state) => state.breeds);
   let temperaments = useSelector((state) => state.temperaments);
-  const [sorting, setSorting] = useState("AtoZ");
-  const [temp, setTemp] = useState("all");
-  const [source, setSource] = useState("all");
+  const { source, temp, sorting } = useSelector((state) => state.filters);
+  // const [sorting, setSorting] = useState("AtoZ");
+  // const [temp, setTemp] = useState("all");
+  // const [source, setSource] = useState("all");
 
   temperaments = temperaments.sort(sortAlphAsc);
 
   useEffect(() => {
-    dispatch(
-      fetchBreedsFromAPI({ source: "all", temp: "all", sorting: "AtoZ" })
-    );
+    dispatch(fetchBreedsFromAPI({ source, temp, sorting }));
     dispatch(fetchTemperamentsFromAPI());
-  }, [dispatch]);
+  }, [dispatch, source, temp, sorting]);
 
   const handleRefresh = () => {
-    setSource("all");
-    setTemp("all");
-    setSorting("AtoZ");
+    // setSource("all");
+    // setTemp("all");
+    // setSorting("AtoZ");
+    dispatch(getFilters("all", "all", "AtoZ"));
     dispatch(
       fetchBreedsFromAPI({ source: "all", temp: "all", sorting: "AtoZ" })
     );
   };
 
   const handleSort = (e) => {
-    setSorting(e.target.value);
+    // setSorting(e.target.value);
+
+    dispatch(getFilters(source, temp, e.target.value));
+
     dispatch(
       fetchBreedsFromAPI({
         source,
@@ -49,12 +56,14 @@ const Home = () => {
   };
 
   const handleSource = (e) => {
-    setSource(e.target.value);
+    // setSource(e.target.value);
+    dispatch(getFilters(e.event.target, temp, sorting));
     dispatch(fetchBreedsFromAPI({ source: e.target.value, temp, sorting }));
   };
 
   const handleTemper = (e) => {
-    setTemp(e.target.value);
+    // setTemp(e.target.value);
+    dispatch(getFilters(source, e.target.value, sorting));
     dispatch(fetchBreedsFromAPI({ source, temp: e.target.value, sorting }));
   };
 

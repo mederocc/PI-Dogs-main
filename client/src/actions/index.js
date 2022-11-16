@@ -68,3 +68,7 @@ export const fetchTemperamentsFromAPI = () => {
       });
   };
 };
+
+export const getFilters = (source, temp, sorting) => {
+  return { type: "GET_FILTERS", payload: { source, temp, sorting } };
+};

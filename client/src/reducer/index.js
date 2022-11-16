@@ -1,6 +1,7 @@
 const initialState = {
   breeds: [],
   temperaments: [],
+  filters: { source: "all", temp: "all", sorting: "AtoZ" },
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -10,6 +11,9 @@ const rootReducer = (state = initialState, action) => {
 
     case "GET_TEMPERAMENTS":
       return { ...state, temperaments: action.payload };
+
+    case "GET_FILTERS":
+      return { ...state, filters: action.payload };
 
     default:
       return state;

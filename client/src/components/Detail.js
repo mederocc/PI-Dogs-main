@@ -7,12 +7,15 @@ const Detail = (props) => {
     fetch(`http://localhost:3001/dogs/${props.match.params.id}`)
       .then((res) => res.json())
       .then((data) => setDetail(data));
-  }, []);
+  }, [props.match.params.id]);
 
   return (
     detail.id && (
       <div>
-        <img src={detail.image.url ? detail.image.url : detail.image} />
+        <img
+          alt={detail.name}
+          src={detail.image.url ? detail.image.url : detail.image}
+        />
         <p>{detail.name}</p>
         <p>{detail.height}</p>
         <p>{detail.weight}</p>
