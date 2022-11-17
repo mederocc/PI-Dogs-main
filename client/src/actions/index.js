@@ -3,7 +3,7 @@ import {
   sortAlphDesc,
   sortLightest,
   sortHeaviest,
-} from "../components/sorting_cbs/sortings";
+} from "./sorting_cbs/sortings";
 
 export const fetchBreedsFromAPI = ({ source, temp, sorting }, query) => {
   return function (dispatch) {

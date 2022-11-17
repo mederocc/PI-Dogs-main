@@ -7,15 +7,17 @@ import {
   getFilters,
 } from "../actions";
 import { Link } from "react-router-dom";
-import Card from "./Card";
+// import Card from "./Card";
 import classes from "./Home.module.css";
-import { sortAlphAsc } from "./sorting_cbs/sortings";
+import { sortAlphAsc } from "../actions/sorting_cbs/sortings";
+import Cards from "./Cards/Cards";
 
 const Home = () => {
   const dispatch = useDispatch();
   const allBreeds = useSelector((state) => state.breeds);
   let temperaments = useSelector((state) => state.temperaments);
   const { source, temp, sorting } = useSelector((state) => state.filters);
+
   // const [sorting, setSorting] = useState("AtoZ");
   // const [temp, setTemp] = useState("all");
   // const [source, setSource] = useState("all");
@@ -37,7 +39,7 @@ const Home = () => {
     );
   };
 
-  const handleSort = (e) => {
+  const handleSort = async (e) => {
     // setSorting(e.target.value);
 
     dispatch(getFilters(source, temp, e.target.value));
@@ -49,15 +51,11 @@ const Home = () => {
         sorting: e.target.value,
       })
     );
-
-    for (let i in allBreeds) {
-      console.log(allBreeds[i]);
-    }
   };
 
   const handleSource = (e) => {
     // setSource(e.target.value);
-    dispatch(getFilters(e.event.target, temp, sorting));
+    dispatch(getFilters(e.target.value, temp, sorting));
     dispatch(fetchBreedsFromAPI({ source: e.target.value, temp, sorting }));
   };
 
@@ -103,27 +101,32 @@ const Home = () => {
       <div>
         <label htmlFor="temperament"> Temperament: </label>
         <span />
-        {!temperaments.length ? (
-          "Loading..."
-        ) : (
-          <select
-            name="temperament"
-            onChange={(e) => {
-              handleTemper(e);
-            }}
-          >
-            {temperaments.map((t) => (
-              <option key={t.id}>{t.name}</option>
+
+        <select
+          name="temperament"
+          onChange={(e) => {
+            handleTemper(e);
+          }}
+        >
+          {temperaments.map((t) => (
+            <option key={t.id}>{t.name}</option>
+          ))}
+        </select>
+      </div>
+
+      {!allBreeds.length && !temperaments.length ? (
+        <p>LOADING</p>
+      ) : (
+        <>
+          <Cards allBreeds={allBreeds} />
+
+          {/* <div className={classes.cards}>
+            {allBreeds.map((b) => (
+              <Card key={b.id} dog={b} />
             ))}
-          </select>
-        )}
-      </div>
-
-      {/*NOT filtered by temperament*/}
-
-      <div className={classes.cards}>
-        {allBreeds.length && allBreeds.map((b) => <Card key={b.id} dog={b} />)}
-      </div>
+          </div> */}
+        </>
+      )}
     </>
   );
 };
