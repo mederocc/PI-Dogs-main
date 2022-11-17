@@ -2,17 +2,25 @@ import React from "react";
 import classes from "./Cards.module.css";
 import Card from "../Card/Card";
 import missingDog from "./missing-dog.jpeg";
+import { useState, useEffect } from "react";
 
 const Cards = ({ allBreeds }) => {
   console.log(allBreeds.length);
 
-  if (!allBreeds.length)
-    return (
-      <>
-        <img alt="missing dog" src={missingDog}></img>
-        <p>No match was found. Try adding one!</p>
-      </>
-    );
+  const [altMessage, setAltMessage] = useState("");
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAltMessage(
+        <>
+          <img alt="missing dog" src={missingDog}></img>
+          <p>No match was found. Try adding one!</p>
+        </>
+      );
+    }, 200);
+  }, [allBreeds]);
+
+  if (!allBreeds.length) return altMessage;
 
   return (
     <div className={classes.cards}>

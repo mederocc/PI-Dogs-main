@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import classes from "./Home.module.css";
 import { sortAlphAsc } from "../actions/sorting_cbs/sortings";
 import Cards from "./Cards/Cards";
+import loadingDog from "./piq-loading.gif";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -67,7 +68,7 @@ const Home = () => {
 
   return (
     <>
-      <h2>Pups be tripping 🐾 </h2>
+      <h2>Get 'em dogs</h2>
       <Link to="/form">Add a new dog</Link>
       <br />
       <button onClick={handleRefresh}>Refresh list</button>
@@ -108,6 +109,9 @@ const Home = () => {
             handleTemper(e);
           }}
         >
+          <option value="" selected disabled>
+            Choose here
+          </option>
           {temperaments.map((t) => (
             <option key={t.id}>{t.name}</option>
           ))}
@@ -115,16 +119,10 @@ const Home = () => {
       </div>
 
       {!allBreeds.length && !temperaments.length ? (
-        <p>LOADING</p>
+        <img alt="loading" src={loadingDog} />
       ) : (
         <>
           <Cards allBreeds={allBreeds} />
-
-          {/* <div className={classes.cards}>
-            {allBreeds.map((b) => (
-              <Card key={b.id} dog={b} />
-            ))}
-          </div> */}
         </>
       )}
     </>
