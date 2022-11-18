@@ -1,22 +1,23 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { /*useState,*/ useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchBreedsFromAPI,
   fetchTemperamentsFromAPI,
   getFilters,
-} from "../actions";
+} from "../../actions";
 import { Link } from "react-router-dom";
-// import Card from "./Card";
-import classes from "./Home.module.css";
-import { sortAlphAsc } from "../actions/sorting_cbs/sortings";
-import Cards from "./Cards/Cards";
-import loadingDog from "./piq-loading.gif";
+// import classes from "./Home.module.css";
+import { sortAlphAsc } from "../../actions/sorting_cbs/sortings";
+import Cards from "../Cards/Cards";
+import loadingDog from "../utils/piq-loading.gif";
+import SearchBar from "../SearchBar/SearchBar";
 
 const Home = () => {
   const dispatch = useDispatch();
   const allBreeds = useSelector((state) => state.breeds);
   let temperaments = useSelector((state) => state.temperaments);
+
   const { source, temp, sorting } = useSelector((state) => state.filters);
 
   // const [sorting, setSorting] = useState("AtoZ");
@@ -40,7 +41,7 @@ const Home = () => {
     );
   };
 
-  const handleSort = async (e) => {
+  const handleSort = (e) => {
     // setSorting(e.target.value);
 
     dispatch(getFilters(source, temp, e.target.value));
@@ -69,8 +70,8 @@ const Home = () => {
   return (
     <>
       <h2>Get 'em dogs</h2>
-      <Link to="/form">Add a new dog</Link>
-      <br />
+      <SearchBar />
+      <Link to="/form">Add a new dog</Link> <br />
       <button onClick={handleRefresh}>Refresh list</button>
       <div>
         <label htmlFor="source">Get pups from: </label>
@@ -109,7 +110,7 @@ const Home = () => {
             handleTemper(e);
           }}
         >
-          <option value="" selected disabled>
+          <option defaultValue="" selected disabled>
             Choose here
           </option>
           {temperaments.map((t) => (
@@ -117,7 +118,6 @@ const Home = () => {
           ))}
         </select>
       </div>
-
       {!allBreeds.length && !temperaments.length ? (
         <img alt="loading" src={loadingDog} />
       ) : (

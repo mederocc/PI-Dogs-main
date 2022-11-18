@@ -9,11 +9,13 @@ export const fetchBreedsFromAPI = ({ source, temp, sorting }, query) => {
   return function (dispatch) {
     return fetch(
       query
-        ? `http://localhost:3001/dogs?${query}`
+        ? `http://localhost:3001/dogs?name=${query}`
         : `http://localhost:3001/dogs`
     )
       .then((response) => response.json())
       .then((data) => {
+        if (typeof data !== "object") throw new Error(data);
+
         switch (sorting) {
           case "AtoZ":
             return data.sort(sortAlphAsc);
@@ -55,13 +57,14 @@ export const fetchBreedsFromAPI = ({ source, temp, sorting }, query) => {
       })
       .then((data) => {
         dispatch({ type: "GET_BREEDS", payload: data });
-      });
+      })
+      .catch((e) => dispatch({ type: "GET_BREEDS", payload: e.message }));
   };
 };
 
 export const fetchTemperamentsFromAPI = () => {
   return function (dispatch) {
-    return fetch(`http://localhost:3001/temperaments?`)
+    return fetch(`http://localhost:3001/temperaments`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({ type: "GET_TEMPERAMENTS", payload: data });

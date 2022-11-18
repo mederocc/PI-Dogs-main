@@ -1,15 +1,27 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import loadingImg from "../utils/piq-loading.gif";
+
 const Detail = (props) => {
   const [detail, setDetail] = useState({ id: null }); //
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch(`http://localhost:3001/dogs/${props.match.params.id}`)
       .then((res) => res.json())
-      .then((data) => setDetail(data));
+      .then((data) => {
+        setDetail(data);
+        setIsLoading(false);
+      });
+
+    return () => {
+      setIsLoading(true);
+    };
   }, [props.match.params.id]);
 
-  return (
+  return isLoading ? (
+    <img alt="loading" src={loadingImg} />
+  ) : (
     detail.id && (
       <div>
         <img
