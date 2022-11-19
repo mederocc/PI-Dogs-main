@@ -18,8 +18,8 @@ const Home = () => {
   const allBreeds = useSelector((state) => state.breeds);
   let temperaments = useSelector((state) => state.temperaments);
   const [selectDefault, setSelectDefault] = useState("DEFAULT");
-
   const { source, temp, sorting } = useSelector((state) => state.filters);
+  const [isLoading, setIsLoading] = useState(true);
 
   // const [sorting, setSorting] = useState("AtoZ");
   // const [temp, setTemp] = useState("all");
@@ -28,24 +28,28 @@ const Home = () => {
   temperaments = temperaments.sort(sortAlphAsc);
 
   useEffect(() => {
+    setIsLoading(true);
     dispatch(fetchBreedsFromAPI({ source, temp, sorting }));
     dispatch(fetchTemperamentsFromAPI());
+    setIsLoading(false);
   }, [dispatch, source, temp, sorting]);
 
   const handleRefresh = () => {
     // setSource("all");
     // setTemp("all");
     // setSorting("AtoZ");
+    setIsLoading(true);
     dispatch(getFilters("all", "all", "AtoZ"));
     dispatch(
       fetchBreedsFromAPI({ source: "all", temp: "all", sorting: "AtoZ" })
     );
     setSelectDefault("DEFAULT");
+    setIsLoading(false);
   };
 
   const handleSort = (e) => {
     // setSorting(e.target.value);
-
+    setIsLoading(true);
     dispatch(getFilters(source, temp, e.target.value));
 
     dispatch(
@@ -55,18 +59,23 @@ const Home = () => {
         sorting: e.target.value,
       })
     );
+    setIsLoading(false);
   };
 
   const handleSource = (e) => {
     // setSource(e.target.value);
+    setIsLoading(true);
     dispatch(getFilters(e.target.value, temp, sorting));
     dispatch(fetchBreedsFromAPI({ source: e.target.value, temp, sorting }));
+    setIsLoading(false);
   };
 
   const handleTemper = (e) => {
     // setTemp(e.target.value);
+    setIsLoading(true);
     dispatch(getFilters(source, e.target.value, sorting));
     dispatch(fetchBreedsFromAPI({ source, temp: e.target.value, sorting }));
+    setIsLoading(false);
   };
 
   return (
@@ -133,7 +142,7 @@ const Home = () => {
         <img alt="loading" src={loadingDog} />
       ) : (
         <>
-          <Cards allBreeds={allBreeds} />
+          <Cards allBreeds={allBreeds} loading={isLoading} />
         </>
       )}
     </>

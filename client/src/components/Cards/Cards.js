@@ -4,7 +4,7 @@ import Card from "../Card/Card";
 import missingDog from "../utils/missing-dog.jpeg";
 import { useState, useEffect } from "react";
 
-const Cards = ({ allBreeds }) => {
+const Cards = ({ allBreeds, loading }) => {
   const [altMessage, setAltMessage] = useState("");
 
   useEffect(() => {
@@ -16,14 +16,20 @@ const Cards = ({ allBreeds }) => {
     );
   }, [allBreeds]);
 
-  if (!allBreeds.length) return altMessage;
+  if (loading) return altMessage;
 
   return (
-    <div className={classes.cards}>
-      {allBreeds.length
-        ? allBreeds.map((b) => <Card key={b.id} dog={b} />)
-        : ""}
-    </div>
+    <>
+      {!loading && allBreeds.length ? (
+        <div className={classes.cards}>
+          {allBreeds.map((b) => (
+            <Card key={b.id} dog={b} />
+          ))}
+        </div>
+      ) : (
+        altMessage
+      )}
+    </>
   );
 };
 
