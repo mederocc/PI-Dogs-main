@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 const Form = () => {
   const dispatch = useDispatch();
   const temperaments = useSelector((state) => state.temperaments);
-  // const [inputError, setInputError] = useState(null);
+  const [selectDefault, setSelectDefault] = useState("DEFAULT");
   const [didSubmit, setDidSubmit] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
   const [form, setForm] = useState({
@@ -67,11 +67,15 @@ const Form = () => {
       case "temperaments":
         setFormValidity((prevState) => ({ ...prevState, temperaments: true }));
 
-        if (form.temperaments.includes(e.target.value)) return;
+        if (form.temperaments.includes(e.target.value)) {
+          setSelectDefault("DEFAULT");
+          return;
+        }
         setForm((prevState) => ({
           ...prevState,
           temperaments: [...prevState.temperaments, e.target.value],
         }));
+        setSelectDefault("DEFAULT");
         return;
 
       default:
@@ -128,9 +132,19 @@ const Form = () => {
       image: "",
       temperaments: [],
     });
+
+    setDidSubmit(true);
   };
 
-  const handleTemperament = (e) => {};
+  const handleRemove = (e) => {
+    console.log(e.target.innerHTML);
+    const removedTemp = e.target.innerHTML;
+
+    setForm((prevState) => ({
+      ...prevState,
+      temperaments: prevState.temperaments.filter((t) => t !== removedTemp),
+    }));
+  };
 
   return (
     <>
@@ -193,8 +207,12 @@ const Form = () => {
             <br />
 
             <label htmlFor="temperaments">Temperament*</label>
-            <select name="temperaments" onChange={handleChange}>
-              <option defaultValue="" selected disabled>
+            <select
+              value={selectDefault}
+              name="temperaments"
+              onChange={handleChange}
+            >
+              <option value="DEFAULT" disabled hidden>
                 Choose here
               </option>
               {temperaments.map((t) => (
@@ -204,7 +222,7 @@ const Form = () => {
             <br />
             {form.temperaments.length
               ? form.temperaments.map((t) => (
-                  <p key={t} onClick={handleTemperament}>
+                  <p key={t} onClick={handleRemove}>
                     {t}
                   </p>
                 ))

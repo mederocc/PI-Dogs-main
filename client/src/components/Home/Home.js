@@ -1,5 +1,5 @@
 import React from "react";
-import { /*useState,*/ useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchBreedsFromAPI,
@@ -17,6 +17,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const allBreeds = useSelector((state) => state.breeds);
   let temperaments = useSelector((state) => state.temperaments);
+  const [selectDefault, setSelectDefault] = useState("DEFAULT");
 
   const { source, temp, sorting } = useSelector((state) => state.filters);
 
@@ -39,6 +40,7 @@ const Home = () => {
     dispatch(
       fetchBreedsFromAPI({ source: "all", temp: "all", sorting: "AtoZ" })
     );
+    setSelectDefault("DEFAULT");
   };
 
   const handleSort = (e) => {
@@ -76,11 +78,15 @@ const Home = () => {
       <div>
         <label htmlFor="source">Get pups from: </label>
         <select
+          value={selectDefault}
           onChange={(e) => {
             handleSource(e);
           }}
           name="source"
         >
+          <option value="DEFAULT" disabled hidden>
+            Choose here
+          </option>
           <option value="all">All</option>
           <option value="api">API only</option>
           <option value="submissions">My submissions</option>
@@ -89,11 +95,15 @@ const Home = () => {
       <div>
         <label htmlFor="order">Order by: </label>
         <select
+          value={selectDefault}
           onChange={(e) => {
             handleSort(e);
           }}
           name="order"
         >
+          <option value="DEFAULT" disabled hidden>
+            Choose here
+          </option>
           <option value="AtoZ">A to Z</option>
           <option value="ZtoA">Z to A</option>
           <option value="lightest">Lightest</option>
@@ -105,12 +115,13 @@ const Home = () => {
         <span />
 
         <select
+          value={selectDefault}
           name="temperament"
           onChange={(e) => {
             handleTemper(e);
           }}
         >
-          <option defaultValue="" selected disabled>
+          <option value="DEFAULT" disabled hidden>
             Choose here
           </option>
           {temperaments.map((t) => (

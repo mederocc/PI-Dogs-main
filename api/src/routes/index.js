@@ -96,7 +96,7 @@ router.get("/dogs/:id", async (req, res) => {
 router.post("/dogs", async (req, res) => {
   const { name, height, weight, life_span, image, temperament } = req.body;
   try {
-    if (!name || !height || !weight || !temperament) {
+    if (!name || !height || !weight || !temperament.length) {
       throw new Error("Missing values!");
     }
     const newBreed = await Breed.create({
