@@ -25,7 +25,7 @@ const Pagination = ({
 
   return (
     <nav>
-      <div>
+      <div className={classes.container}>
         <button onClick={handlePrev} disabled={currentPage === 1}>
           Previous Page
         </button>

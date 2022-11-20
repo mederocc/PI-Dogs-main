@@ -160,7 +160,7 @@ const Home = () => {
           <Cards allBreeds={currentPups} loading={isLoading} />
         </>
       )}
-      {allBreeds.length ? (
+      {allBreeds.length > pupsPerPage ? (
         <Pagination
           pupsPerPage={pupsPerPage}
           totalPups={allBreeds.length}

@@ -16,8 +16,6 @@ const Cards = ({ allBreeds, loading }) => {
     );
   }, [allBreeds]);
 
-  if (loading) return altMessage;
-
   return (
     <>
       {!loading && allBreeds.length ? (
