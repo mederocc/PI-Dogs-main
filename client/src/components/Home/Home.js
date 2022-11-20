@@ -7,7 +7,7 @@ import {
   getFilters,
 } from "../../actions";
 import { Link } from "react-router-dom";
-// import classes from "./Home.module.css";
+import classes from "./Home.module.css";
 import { sortAlphAsc } from "../../actions/sorting_cbs/sortings";
 import Cards from "../Cards/Cards";
 import loadingDog from "../utils/piq-loading.gif";

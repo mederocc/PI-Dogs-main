@@ -1,4 +1,5 @@
 import React from "react";
+import classes from "./Pagination.module.css";
 
 const Pagination = ({
   pupsPerPage,
@@ -30,7 +31,12 @@ const Pagination = ({
         </button>
         {pageNumbers.map((number) => (
           <div key={number}>
-            <button onClick={() => paginate(number)}>{number}</button>
+            <button
+              className={currentPage === number && classes.clicked}
+              onClick={() => paginate(number)}
+            >
+              {number}
+            </button>
           </div>
         ))}
         <button
