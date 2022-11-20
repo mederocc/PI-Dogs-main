@@ -163,6 +163,7 @@ const Form = () => {
 
             <label htmlFor="minHeight">Minimum Height: </label>
             <input
+              min="0"
               onChange={handleChange}
               value={form.minHeight}
               name="minHeight"
@@ -172,6 +173,7 @@ const Form = () => {
 
             <label htmlFor="maxHeight">Maximum Height* </label>
             <input
+              min="1"
               onChange={handleChange}
               value={form.maxHeight}
               name="maxHeight"
@@ -181,6 +183,7 @@ const Form = () => {
 
             <label htmlFor="weight">Weight* </label>
             <input
+              min="1"
               onChange={handleChange}
               value={form.weight}
               name="weight"
@@ -190,6 +193,7 @@ const Form = () => {
 
             <label htmlFor="life_span">Lifespan </label>
             <input
+              min="1"
               onChange={handleChange}
               value={form.life_span}
               name="life_span"

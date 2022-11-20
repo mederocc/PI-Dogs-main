@@ -12,6 +12,7 @@ import { sortAlphAsc } from "../../actions/sorting_cbs/sortings";
 import Cards from "../Cards/Cards";
 import loadingDog from "../utils/piq-loading.gif";
 import SearchBar from "../SearchBar/SearchBar";
+import Pagination from "../Pagination/Pagination";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,8 @@ const Home = () => {
   const [selectDefault, setSelectDefault] = useState("DEFAULT");
   const { source, temp, sorting } = useSelector((state) => state.filters);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pupsPerPage = 8;
 
   // const [sorting, setSorting] = useState("AtoZ");
   // const [temp, setTemp] = useState("all");
@@ -78,12 +81,24 @@ const Home = () => {
     setIsLoading(false);
   };
 
+  // Get current dogs
+
+  const indexOfLastPup = currentPage * pupsPerPage;
+  const indexOfFirstPup = indexOfLastPup - pupsPerPage;
+  const currentPups = allBreeds.slice(indexOfFirstPup, indexOfLastPup);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const paginatePrev = (prevPage) => setCurrentPage(prevPage);
+
+  const paginateNext = (nextPage) => setCurrentPage(nextPage);
+
   return (
     <>
       <h2>Get 'em dogs</h2>
       <SearchBar />
       <Link to="/form">Add a new dog</Link> <br />
-      <button onClick={handleRefresh}>Refresh list</button>
+      <button onClick={handleRefresh}>Reset filters</button>
       <div>
         <label htmlFor="source">Get pups from: </label>
         <select
@@ -142,8 +157,20 @@ const Home = () => {
         <img alt="loading" src={loadingDog} />
       ) : (
         <>
-          <Cards allBreeds={allBreeds} loading={isLoading} />
+          <Cards allBreeds={currentPups} loading={isLoading} />
         </>
+      )}
+      {allBreeds.length ? (
+        <Pagination
+          pupsPerPage={pupsPerPage}
+          totalPups={allBreeds.length}
+          paginate={paginate}
+          paginatePrev={paginatePrev}
+          currentPage={currentPage}
+          paginateNext={paginateNext}
+        />
+      ) : (
+        ""
       )}
     </>
   );
