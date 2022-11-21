@@ -32,7 +32,7 @@ const Pagination = ({
         {pageNumbers.map((number) => (
           <div key={number}>
             <button
-              className={currentPage === number && classes.clicked}
+              className={currentPage === number ? classes.clicked : ""}
               onClick={() => paginate(number)}
             >
               {number}

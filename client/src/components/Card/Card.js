@@ -5,7 +5,11 @@ import { Link } from "react-router-dom";
 const Card = (props) => {
   return (
     <div className={classes["card-container"]}>
-      <Link to={`/detail/${props.dog.id}`} dog={props}>
+      <Link
+        style={{ textDecoration: "none" }}
+        to={`/detail/${props.dog.id}`}
+        dog={props}
+      >
         <div className={classes["img-container"]}>
           <img
             src={props.dog.image.url ? props.dog.image.url : props.dog.image}

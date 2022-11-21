@@ -11,7 +11,6 @@ const SearchBar = () => {
   const [isFocused, setIsfocused] = useState("");
 
   const handleChange = () => {
-    console.log(isFocused);
     setInputError(/\d/.test(searchRef.current.value));
   };
 
@@ -40,7 +39,9 @@ const SearchBar = () => {
         name="name"
         type="text"
       ></input>
-      <button type="submit">Search</button>
+      <button type="submit" disabled={inputError}>
+        Search
+      </button>
       <br />
       {inputError && <p>Field must not contain numbers</p>}
       {queryError.error && isFocused === false && <p>{queryError.message}</p>}

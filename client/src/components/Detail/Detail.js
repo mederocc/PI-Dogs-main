@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import loadingImg from "../utils/piq-loading.gif";
+import { Link } from "react-router-dom";
 
 const Detail = (props) => {
   const [detail, setDetail] = useState({ id: null }); //
@@ -20,10 +21,18 @@ const Detail = (props) => {
   }, [props.match.params.id]);
 
   return isLoading ? (
-    <img alt="loading" src={loadingImg} />
+    <div>
+      <Link style={{ textDecoration: "none" }} to="/Home">
+        <h1>Henry Dogs</h1>
+      </Link>
+      <img alt="loading" src={loadingImg} />
+    </div>
   ) : (
     detail.id && (
       <div>
+        <Link to="/Home">
+          <h1>Henry Dogs</h1>
+        </Link>
         <img
           alt={detail.name}
           src={detail.image.url ? detail.image.url : detail.image}

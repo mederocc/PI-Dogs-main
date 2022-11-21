@@ -9,9 +9,6 @@ import Form from "./components/Form/Form";
 function App() {
   return (
     <div className="App">
-      <Link to="/Home">
-        <h1>Henry Dogs</h1>
-      </Link>
       <Route exact path="/" component={LandingPage} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/detail/:id" component={Detail} />

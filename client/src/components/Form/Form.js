@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import classes from "./Form.module.css";
 import { fetchTemperamentsFromAPI } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -148,6 +149,9 @@ const Form = () => {
 
   return (
     <>
+      <Link style={{ textDecoration: "none" }} to="/Home">
+        <h1>Henry Dogs</h1>
+      </Link>
       {!didSubmit && (
         <form onSubmit={handleSubmit}>
           <div className={classes["fields-container"]}>

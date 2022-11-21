@@ -95,9 +95,15 @@ const Home = () => {
 
   return (
     <>
+      <Link style={{ textDecoration: "none" }} to="/Home">
+        <h1>Henry Dogs</h1>
+      </Link>
       <h2>Get 'em dogs</h2>
       <SearchBar />
-      <Link to="/form">Add a new dog</Link> <br />
+      <Link style={{ textDecoration: "none" }} to="/form">
+        Add a new dog
+      </Link>{" "}
+      <br />
       <button onClick={handleRefresh}>Reset filters</button>
       <div>
         <label htmlFor="source">Get pups from: </label>
