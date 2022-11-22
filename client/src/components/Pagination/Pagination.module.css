@@ -7,3 +7,26 @@
   justify-content: center;
   padding: 3rem;
 }
+button {
+  padding: 1rem;
+  border: none;
+  margin: 0.5rem;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.2);
+  border-radius: 5%;
+  font-size: normal;
+  font-weight: bold;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+    sans-serif;
+  background-color: whitesmoke;
+  transition: 0.5s;
+}
+
+button:hover {
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+select:hover {
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.3);
+}

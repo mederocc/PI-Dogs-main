@@ -42,7 +42,7 @@ const SearchBar = () => {
         <form onSubmit={handleSubmit}>
           <label htmlFor="name"></label>
           <input
-            autocomplete="off"
+            autoComplete="off"
             className={classes.input}
             onFocus={handleFocus}
             onChange={handleChange}

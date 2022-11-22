@@ -2,6 +2,14 @@
   box-sizing: border-box;
   padding: 0px;
   margin: 0px;
+  font-size: normal;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+    sans-serif;
+}
+
+.loading {
+  width: 11rem;
+  height: 11rem;
 }
 
 .title-container {
@@ -26,11 +34,54 @@
 }
 
 .upper-box {
-  width: 30%;
+  margin-right: 0.5%;
+  width: 35%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 0.5rem;
+}
+
+.upper-box button {
+  padding: 1rem;
+  border: none;
+  margin: 0.5rem;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.2);
+  border-radius: 5%;
+  font-size: normal;
+  font-weight: bold;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+    sans-serif;
+  background-color: whitesmoke;
+}
+
+.upper-box span {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  display: block;
+  text-overflow: ellipsis;
+}
+
+.filter-list {
+  font-weight: bold;
+  padding: 1%;
+  display: flex;
+}
+
+select,
+option {
+  padding: 1rem;
+  border: none;
+  margin: 0.5rem;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.2);
+  border-radius: 5%;
+  font-size: normal;
+  font-weight: bold;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+    sans-serif;
+  background-color: whitesmoke;
+  transition: 0.5s;
 }
 
 .bg-container {

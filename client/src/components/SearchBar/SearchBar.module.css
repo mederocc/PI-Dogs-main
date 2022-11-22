@@ -21,6 +21,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: normal;
+  font-weight: bold;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+    sans-serif;
 }
 
 .input {
@@ -31,15 +35,33 @@
   border-radius: 5%;
   padding: 0.5%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: 0.5s;
 }
+
+.input:focus {
+  background-color: whitesmoke;
+}
+
+.input:hover {
+  background-color: whitesmoke;
+}
+
 .input-btn {
+  font-size: normal;
+  font-weight: bold;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+    sans-serif;
   margin-top: 2rem;
   margin-bottom: 2rem;
   margin-left: 1rem;
   border: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 5%;
-  padding: 0.5%;
+  padding-top: 2%;
+  padding-bottom: 4.5%;
+  padding-left: 3%;
+  padding-right: 3%;
   max-height: 2.1rem;
 }
 
