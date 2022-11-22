@@ -20,7 +20,7 @@ const LandingPage = () => {
           <button className={classes["enter-btn"]}>ENTER SITE</button>{" "}
         </Link>
       </div>
-      <div className={classes["img-container"]}>
+      <div className={classes["icon-container"]}>
         <div></div>
         <div className={classes["right-sided"]}>
           <div className={classes["icon-one"]}>
@@ -34,10 +34,12 @@ const LandingPage = () => {
           </div>
           <div className={classes["icon-two"]}>
             <a
+              rel="noreferrer"
               target="_blank"
               href="https://www.linkedin.com/in/carlos-medero-546239107/"
             >
               <img
+                rel="noreferrer"
                 className={classes["icon-image"]}
                 src={linkedInIcon}
                 alt="link to LinkedIn"

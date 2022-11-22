@@ -1,0 +1,49 @@
+.bar-container {
+  display: grid;
+  grid-template-areas: "empty empty bar bar bar errors errors";
+}
+
+.form {
+  grid-area: bar;
+  width: 33vw;
+}
+
+.empty {
+  grid-area: empty;
+
+  width: 33vw;
+}
+
+.errors {
+  max-width: 30%;
+  grid-area: errors;
+  width: 33vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  border: none;
+  border-radius: 5%;
+  padding: 0.5%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.input-btn {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5%;
+  padding: 0.5%;
+  max-height: 2.1rem;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}

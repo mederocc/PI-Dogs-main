@@ -148,10 +148,14 @@ const Form = () => {
   };
 
   return (
-    <>
-      <Link style={{ textDecoration: "none" }} to="/Home">
-        <h1>Henry Dogs</h1>
-      </Link>
+    <div className={classes.bg}>
+      <div className={classes["title-container"]}>
+        <div></div>
+        <Link style={{ textDecoration: "none" }} to="/Home">
+          <div className={classes.title}>Henry Dogs</div>
+        </Link>
+        <div></div>
+      </div>
       {!didSubmit && (
         <form onSubmit={handleSubmit}>
           <div className={classes["fields-container"]}>
@@ -243,7 +247,7 @@ const Form = () => {
         </form>
       )}
       {didSubmit && <h1>{responseMessage}</h1>}
-    </>
+    </div>
   );
 };
 

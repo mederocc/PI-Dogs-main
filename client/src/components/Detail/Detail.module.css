@@ -1,0 +1,15 @@
+.title-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+.title {
+  font-family: Impact, Charcoal, sans-serif;
+  background-image: url("/Users/carlosmedero/Documents/HENRY/PI/PI-Dogs-main/client/src/components/utils/picture_bank/staring-dog-3.png");
+  font-size: 4vw;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  background-size: cover;
+}

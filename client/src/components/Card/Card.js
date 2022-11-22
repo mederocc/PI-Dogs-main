@@ -12,11 +12,12 @@ const Card = (props) => {
       >
         <div className={classes["img-container"]}>
           <img
+            className={classes.img}
             src={props.dog.image.url ? props.dog.image.url : props.dog.image}
             alt={props.dog.name}
           />
         </div>
-        <h3>{props.dog.name}</h3>
+        <h1>{props.dog.name}</h1>
         <p>{props.dog.temperament}</p>
         <p>{props.dog.weight} kg</p>
       </Link>

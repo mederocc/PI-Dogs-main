@@ -2,6 +2,7 @@ import React from "react";
 import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchBreedsFromAPI } from "../../actions";
+import classes from "./SearchBar.module.css";
 const SearchBar = () => {
   const dispatch = useDispatch();
   const searchRef = useRef(null);
@@ -11,7 +12,12 @@ const SearchBar = () => {
   const [isFocused, setIsfocused] = useState("");
 
   const handleChange = () => {
-    setInputError(/\d/.test(searchRef.current.value));
+    setIsfocused(true);
+    if (searchRef.current.value.length) {
+      setInputError(!/^[a-z ,.'-]+$/i.test(searchRef.current.value));
+      return;
+    }
+    setInputError(false);
   };
 
   const handleSubmit = (e) => {
@@ -30,22 +36,34 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="name"></label>
-      <input
-        onFocus={handleFocus}
-        onChange={handleChange}
-        ref={searchRef}
-        name="name"
-        type="text"
-      ></input>
-      <button type="submit" disabled={inputError}>
-        Search
-      </button>
-      <br />
-      {inputError && <p>Field must not contain numbers</p>}
-      {queryError.error && isFocused === false && <p>{queryError.message}</p>}
-    </form>
+    <div className={classes["bar-container"]}>
+      <div className={classes.empty}></div>
+      <div className={classes.form}>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="name"></label>
+          <input
+            autocomplete="off"
+            className={classes.input}
+            onFocus={handleFocus}
+            onChange={handleChange}
+            ref={searchRef}
+            name="name"
+            type="text"
+          ></input>
+          <button
+            className={classes["input-btn"]}
+            type="submit"
+            disabled={inputError}
+          >
+            Search
+          </button>
+        </form>
+      </div>
+      <div className={classes.errors}>
+        {inputError && <p>Input is invalid</p>}
+        {queryError.error && isFocused === false && <p>{queryError.message}</p>}
+      </div>
+    </div>
   );
 };
 

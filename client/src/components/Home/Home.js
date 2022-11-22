@@ -94,71 +94,81 @@ const Home = () => {
   const paginateNext = (nextPage) => setCurrentPage(nextPage);
 
   return (
-    <>
-      <Link style={{ textDecoration: "none" }} to="/Home">
-        <h1>Henry Dogs</h1>
-      </Link>
-      <h2>Get 'em dogs</h2>
-      <SearchBar />
-      <Link style={{ textDecoration: "none" }} to="/form">
-        Add a new dog
-      </Link>{" "}
-      <br />
-      <button onClick={handleRefresh}>Reset filters</button>
-      <div>
-        <label htmlFor="source">Get pups from: </label>
-        <select
-          value={selectDefault}
-          onChange={(e) => {
-            handleSource(e);
-          }}
-          name="source"
-        >
-          <option value="DEFAULT" disabled hidden>
-            Choose here
-          </option>
-          <option value="all">All</option>
-          <option value="api">API only</option>
-          <option value="submissions">My submissions</option>
-        </select>
+    <div className={classes["bg-container"]}>
+      <div className={classes["title-container"]}>
+        <div></div>
+        <Link style={{ textDecoration: "none" }} to="/Home">
+          <div className={classes.title}>Henry Dogs</div>
+        </Link>
+        <div></div>
       </div>
-      <div>
-        <label htmlFor="order">Order by: </label>
-        <select
-          value={selectDefault}
-          onChange={(e) => {
-            handleSort(e);
-          }}
-          name="order"
-        >
-          <option value="DEFAULT" disabled hidden>
-            Choose here
-          </option>
-          <option value="AtoZ">A to Z</option>
-          <option value="ZtoA">Z to A</option>
-          <option value="lightest">Lightest</option>
-          <option value="heaviest">Heaviest</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="temperament"> Temperament: </label>
-        <span />
 
-        <select
-          value={selectDefault}
-          name="temperament"
-          onChange={(e) => {
-            handleTemper(e);
-          }}
-        >
-          <option value="DEFAULT" disabled hidden>
-            Choose here
-          </option>
-          {temperaments.map((t) => (
-            <option key={t.id}>{t.name}</option>
-          ))}
-        </select>
+      <SearchBar />
+      <div className={classes.container}>
+        <div></div>
+        <div className={classes["upper-box"]}>
+          <Link style={{ textDecoration: "none" }} to="/form">
+            <button>Add a new dog</button>
+          </Link>
+          <button onClick={handleRefresh}>Reset filters</button>
+          <div className={classes["filter-list"]}>
+            <label htmlFor="source">Get pups from: </label>
+            <select
+              value={selectDefault}
+              onChange={(e) => {
+                handleSource(e);
+              }}
+              name="source"
+            >
+              <option value="DEFAULT" disabled hidden>
+                Choose here
+              </option>
+              <option value="all">All</option>
+              <option value="api">API only</option>
+              <option value="submissions">My submissions</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="order">Order by: </label>
+            <select
+              value={selectDefault}
+              onChange={(e) => {
+                handleSort(e);
+              }}
+              name="order"
+            >
+              <option value="DEFAULT" disabled hidden>
+                Choose here
+              </option>
+              <option value="AtoZ">A to Z</option>
+              <option value="ZtoA">Z to A</option>
+              <option value="lightest">Lightest</option>
+              <option value="heaviest">Heaviest</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="temperament"> Temperament: </label>
+            <span />
+
+            <select
+              value={selectDefault}
+              name="temperament"
+              onChange={(e) => {
+                handleTemper(e);
+              }}
+            >
+              <option value="DEFAULT" disabled hidden>
+                Choose here
+              </option>
+              {temperaments.map((t) => (
+                <option key={t.id}>{t.name}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div></div>
       </div>
+
       {!allBreeds.length && !temperaments.length ? (
         <img alt="loading" src={loadingDog} />
       ) : (
@@ -178,7 +188,7 @@ const Home = () => {
       ) : (
         ""
       )}
-    </>
+    </div>
   );
 };
 

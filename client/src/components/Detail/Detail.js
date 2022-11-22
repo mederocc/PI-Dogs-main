@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import loadingImg from "../utils/piq-loading.gif";
 import { Link } from "react-router-dom";
+import classes from "./Detail.module.css";
 
 const Detail = (props) => {
   const [detail, setDetail] = useState({ id: null }); //
@@ -22,17 +23,25 @@ const Detail = (props) => {
 
   return isLoading ? (
     <div>
-      <Link style={{ textDecoration: "none" }} to="/Home">
-        <h1>Henry Dogs</h1>
-      </Link>
+      <div className={classes["title-container"]}>
+        <div></div>
+        <Link style={{ textDecoration: "none" }} to="/Home">
+          <div className={classes.title}>Henry Dogs</div>
+        </Link>
+        <div></div>
+      </div>
       <img alt="loading" src={loadingImg} />
     </div>
   ) : (
     detail.id && (
       <div>
-        <Link to="/Home">
-          <h1>Henry Dogs</h1>
-        </Link>
+        <div className={classes["title-container"]}>
+          <div></div>
+          <Link style={{ textDecoration: "none" }} to="/Home">
+            <div className={classes.title}>Henry Dogs</div>
+          </Link>
+          <div></div>
+        </div>
         <img
           alt={detail.name}
           src={detail.image.url ? detail.image.url : detail.image}

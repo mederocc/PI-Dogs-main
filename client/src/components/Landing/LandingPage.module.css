@@ -1,11 +1,10 @@
-@media (min-width: 1762px) {
-  .landing-container {
-    height: 100vh;
-    width: 100vw;
-    background-size: cover;
-    background-image: url("/Users/carlosmedero/Documents/HENRY/PI/PI-Dogs-main/client/src/components/utils/picture_bank/frisbee-dog.jpeg");
-  }
+.landing-container {
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-image: url("/Users/carlosmedero/Documents/HENRY/PI/PI-Dogs-main/client/src/components/utils/picture_bank/frisbee-dog.jpeg");
 }
+
 .css-text-mask {
   font-size: 10vw;
   font-family: Impact, Charcoal, sans-serif;
@@ -19,9 +18,9 @@
   text-shadow: 0 6px 6px rgba(0, 0, 0, 0.4);
 }
 
-@media (max-width: 1762px) {
-  body {
-    background-image: url("/Users/carlosmedero/Documents/HENRY/PI/PI-Dogs-main/client/src/components/utils/picture_bank/dog-by-bridge.jpeg");
+@media (max-width: 1500px) {
+  .landing-container {
+    background-image: url("/Users/carlosmedero/Documents/HENRY/PI/PI-Dogs-main/client/src/components/utils/picture_bank/grass2.jpeg");
   }
 }
 
@@ -63,7 +62,7 @@ h1 {
   justify-content: space-evenly;
 }
 
-.img-container {
+.icon-container {
   display: flex;
   flex-direction: column;
   height: 14rem;
@@ -101,6 +100,6 @@ h1 {
   height: 18rem;
 }
 
-button:hover {
+.enter-btn:hover {
   box-shadow: 2px 9px 9px rgba(0, 0, 0, 0.4);
 }
