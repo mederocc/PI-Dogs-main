@@ -1,14 +1,15 @@
 .bar-container {
+  /* border: 3px solid red; */
   display: grid;
   grid-template-areas: "empty empty bar bar bar errors errors";
 }
 
-.form {
+.search-form {
   grid-area: bar;
   width: 33vw;
 }
 
-.empty {
+.empty-l {
   grid-area: empty;
 
   width: 33vw;
@@ -30,10 +31,10 @@
 .input {
   margin-top: 2rem;
   margin-bottom: 2rem;
-  width: 100%;
+  width: 80%;
   border: none;
   border-radius: 5%;
-  padding: 0.5%;
+  padding: 2%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: rgba(255, 255, 255, 0.3);
   transition: 0.5s;
@@ -44,7 +45,7 @@
 }
 
 .input:hover {
-  background-color: whitesmoke;
+  background-color: rgba(255, 255, 255, 3);
 }
 
 .input-btn {

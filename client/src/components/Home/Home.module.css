@@ -13,6 +13,7 @@
 }
 
 .title-container {
+  margin-top: 1rem;
   display: flex;
   justify-content: space-evenly;
 }
@@ -52,7 +53,7 @@
   font-weight: bold;
   font-family: "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
     sans-serif;
-  background-color: whitesmoke;
+  background-color: rgba(255, 255, 255, 3);
 }
 
 .upper-box span {
@@ -69,8 +70,7 @@
   display: flex;
 }
 
-select,
-option {
+.upper-box select {
   padding: 1rem;
   border: none;
   margin: 0.5rem;
@@ -80,8 +80,10 @@ option {
   font-weight: bold;
   font-family: "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
     sans-serif;
-  background-color: whitesmoke;
   transition: 0.5s;
+}
+.upper-box select:focus {
+  outline: thin dotted;
 }
 
 .bg-container {
@@ -92,5 +94,5 @@ option {
   width: 100vw;
   background-size: cover;
   position: relative;
-  background-image: url("/Users/carlosmedero/Documents/HENRY/PI/PI-Dogs-main/client/src/components/utils/gradients/gradiente8.jpg");
+  background-image: url("/Users/carlosmedero/Documents/HENRY/PI/PI-Dogs-main/client/src/components/utils/picture_bank/sand.jpg");
 }

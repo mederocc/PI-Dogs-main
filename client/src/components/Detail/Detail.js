@@ -21,38 +21,48 @@ const Detail = (props) => {
     };
   }, [props.match.params.id]);
 
-  return isLoading ? (
-    <div>
-      <div className={classes["title-container"]}>
-        <div></div>
-        <Link style={{ textDecoration: "none" }} to="/Home">
-          <div className={classes.title}>Henry Dogs</div>
-        </Link>
-        <div></div>
-      </div>
-      <img alt="loading" src={loadingImg} />
-    </div>
-  ) : (
-    detail.id && (
-      <div>
-        <div className={classes["title-container"]}>
-          <div></div>
-          <Link style={{ textDecoration: "none" }} to="/Home">
-            <div className={classes.title}>Henry Dogs</div>
-          </Link>
-          <div></div>
+  return (
+    <div className={classes.bg}>
+      {isLoading ? (
+        <div className={classes.bg}>
+          <div className={classes["title-container"]}>
+            <div></div>
+            <Link style={{ textDecoration: "none" }} to="/Home">
+              <div className={classes.title}>Henry Dogs</div>
+            </Link>
+            <div></div>
+          </div>
+          <div className={classes["loading-img"]}>
+            <img alt="loading" src={loadingImg} />
+          </div>
         </div>
-        <img
-          alt={detail.name}
-          src={detail.image.url ? detail.image.url : detail.image}
-        />
-        <p>{detail.name}</p>
-        <p>{detail.height}</p>
-        <p>{detail.weight}</p>
-        <p>{detail.lifeSpan}</p>
-        <p>{detail.temperament}</p>
-      </div>
-    )
+      ) : (
+        detail.id && (
+          <div>
+            <div className={classes["title-container"]}>
+              <div></div>
+              <Link style={{ textDecoration: "none" }} to="/Home">
+                <div className={classes.title}>Henry Dogs</div>
+              </Link>
+              <div></div>
+            </div>
+            <div className={classes["detail-container"]}>
+              <img
+                alt={detail.name}
+                src={detail.image.url ? detail.image.url : detail.image}
+              />
+              <div className={classes.info}>
+                <p>{detail.name}</p>
+                <p>{detail.height}</p>
+                <p>{detail.weight}</p>
+                <p>{detail.lifeSpan}</p>
+                <p>{detail.temperament}</p>
+              </div>
+            </div>
+          </div>
+        )
+      )}
+    </div>
   );
 };
 

@@ -6,10 +6,11 @@
   width: 100vw;
   background-size: cover;
   position: relative;
-  background-image: url("/Users/carlosmedero/Documents/HENRY/PI/PI-Dogs-main/client/src/components/utils/gradients/gradient5.jpg");
+  background-image: url("/Users/carlosmedero/Documents/HENRY/PI/PI-Dogs-main/client/src/components/utils/picture_bank/sand.jpg");
 }
 
 .title-container {
+  margin-top: 2rem;
   display: flex;
   justify-content: space-evenly;
 }
@@ -26,12 +27,110 @@
 }
 
 .fields-container {
+  min-width: 100%;
+  margin-right: 0.5%;
+  width: 35%;
   display: flex;
-  flex-direction: column;
-  max-width: 30%;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.5rem;
 }
 
-form {
+.form {
+  width: 20rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  margin-top: 2rem;
+
+  font-size: normal;
+  font-weight: bold;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+    sans-serif;
+}
+
+.form input {
+  border: none;
+  border-radius: 5%;
+  padding: 2%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: whitesmoke;
+  transition: 0.5s;
+}
+
+.form label {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.empty {
+  width: 30%;
+}
+
+.form button {
+  background-color: whitesmoke;
+
+  margin: 3rem 0;
+}
+
+.form select {
+  padding: 0.3rem;
+  border: none;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.2);
+  border-radius: 5%;
+  font-size: normal;
+  font-weight: bold;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+    sans-serif;
+  background-color: whitesmoke;
+  transition: 0.5s;
+}
+
+.added-temperaments {
+  border-radius: 3%;
+  margin-top: 2rem;
+
+  display: flex;
+  width: 20rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, 0.15);
+
+  font-weight: normal;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+    sans-serif;
+}
+
+.added-temperaments p {
+  color: whitesmoke;
+  cursor: default;
+  transition: 0.5s;
+}
+
+.form select:focus {
+  outline: thin dotted;
+}
+.form button:hover {
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+/* 
+.form select:hover {
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+} */
+
+.added-temperaments p:hover {
+  font-size: larger;
+}
+
+.form input:hover {
+  background-color: aquamarine;
+}
+
+.form select:hover {
+  background-color: aquamarine;
+}
+
+.form button:hover {
+  background-color: aquamarine;
 }

@@ -37,8 +37,8 @@ const SearchBar = () => {
 
   return (
     <div className={classes["bar-container"]}>
-      <div className={classes.empty}></div>
-      <div className={classes.form}>
+      <div className={classes["empty-l"]}></div>
+      <div className={classes["search-form"]}>
         <form onSubmit={handleSubmit}>
           <label htmlFor="name"></label>
           <input

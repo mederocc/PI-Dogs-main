@@ -1,4 +1,5 @@
 .title-container {
+  margin-top: 2rem;
   display: flex;
   justify-content: space-evenly;
 }
@@ -12,4 +13,32 @@
   text-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.2);
   text-decoration: none;
   background-size: cover;
+}
+
+.detail-container {
+  margin-top: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-container img {
+  width: 30rem;
+  border-radius: 3%;
+}
+
+.info {
+  border-radius: 3%;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.bg {
+  filter: drop-shadow(3px 5px 10px #000);
+
+  overflow: scroll;
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  position: relative;
+  background-image: url("/Users/carlosmedero/Documents/HENRY/PI/PI-Dogs-main/client/src/components/utils/picture_bank/sand.jpg");
 }

@@ -109,7 +109,7 @@ const Home = () => {
         <div className={classes["upper-box"]}>
           <Link style={{ textDecoration: "none" }} to="/form">
             <button>
-              <span>Add a new dog</span>
+              <span>Add new breed</span>
             </button>
           </Link>
           <button onClick={handleRefresh}>

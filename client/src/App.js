@@ -1,6 +1,5 @@
 import "./App.css";
 import { Route } from "react-router-dom";
-import { Link } from "react-router-dom";
 import LandingPage from "./components/Landing/LandingPage";
 import Home from "./components/Home/Home.js";
 import Detail from "./components/Detail/Detail";
