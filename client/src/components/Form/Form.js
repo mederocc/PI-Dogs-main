@@ -128,7 +128,9 @@ const Form = () => {
       }`,
       weight: form.weight,
       life_span: `${form.life_span} years`,
-      image: form.image,
+      image: /(https?:\/\/.*\.(?:png|jpg|jpeg))/i.test(form.image)
+        ? form.image
+        : "https://www.dogstrust.ie/sponsor/_media/mystery-dog/133330dog-gallery.dog-profile-mobile-mystery-1.jpg",
       temperament: form.temperaments,
     };
 

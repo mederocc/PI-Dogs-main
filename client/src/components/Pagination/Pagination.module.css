@@ -5,7 +5,7 @@
 .container {
   display: flex;
   justify-content: center;
-  padding: 3rem;
+  margin-bottom: 3rem;
   flex-wrap: wrap;
 }
 button {
