@@ -11,6 +11,9 @@ const Form = () => {
   const [selectDefault, setSelectDefault] = useState("DEFAULT");
   const [didSubmit, setDidSubmit] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
+
+  const [isTempWarning, setIsTempWarning] = useState(false);
+
   const [form, setForm] = useState({
     name: "",
     minHeight: "",
@@ -31,6 +34,16 @@ const Form = () => {
     temperaments: false,
   });
 
+  const [didFocus, setDidFocus] = useState({
+    name: false,
+    minHeight: false,
+    maxHeight: false,
+    weight: false,
+    life_span: false,
+    image: false,
+    temperaments: false,
+  });
+
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
@@ -42,6 +55,8 @@ const Form = () => {
   }, [formValidity]);
 
   const handleChange = (e) => {
+    setDidFocus((prevState) => ({ ...prevState, [e.target.name]: true }));
+
     switch (e.target.name) {
       case "name":
         if (e.target.value.length) {
@@ -69,6 +84,13 @@ const Form = () => {
           setSelectDefault("DEFAULT");
           return;
         }
+
+        if (form.temperaments.length > 5) {
+          setIsTempWarning(true);
+
+          return;
+        }
+
         setForm((prevState) => ({
           ...prevState,
           temperaments: [...prevState.temperaments, e.target.value],
@@ -137,6 +159,15 @@ const Form = () => {
     console.log(e.target.innerHTML);
     const removedTemp = e.target.innerHTML;
 
+    if (form.temperaments.length > 5) {
+      setIsTempWarning(false);
+    }
+
+    if (form.temperaments.length < 2) {
+      // <2 => Since 1 will be deducted next
+      setFormValidity((prevState) => ({ ...prevState, temperaments: false }));
+    }
+
     setForm((prevState) => ({
       ...prevState,
       temperaments: prevState.temperaments.filter((t) => t !== removedTemp),
@@ -157,87 +188,108 @@ const Form = () => {
           <div className={classes.empty}></div>
 
           <form onSubmit={handleSubmit}>
-            <div className={classes.form}>
-              <label htmlFor="name">Name* </label>
-              <input
-                autoComplete="off"
-                onChange={handleChange}
-                name="name"
-                type="text"
-                value={form.name}
-              ></input>
-              <label htmlFor="minHeight">Minimum Height: </label>
-              <input
-                autoComplete="off"
-                min="0"
-                onChange={handleChange}
-                value={form.minHeight}
-                name="minHeight"
-                type="number"
-              ></input>
-              <label htmlFor="maxHeight">Maximum Height* </label>
-              <input
-                autoComplete="off"
-                min="1"
-                onChange={handleChange}
-                value={form.maxHeight}
-                name="maxHeight"
-                type="number"
-              ></input>
-              <label htmlFor="weight">Weight* </label>
-              <input
-                autoComplete="off"
-                min="1"
-                onChange={handleChange}
-                value={form.weight}
-                name="weight"
-                type="number"
-              ></input>
-              <label htmlFor="life_span">Lifespan </label>
-              <input
-                autoComplete="off"
-                min="1"
-                onChange={handleChange}
-                value={form.life_span}
-                name="life_span"
-                type="number"
-              ></input>
-              <label htmlFor="image">Image URL </label>
-              <input
-                autoComplete="off"
-                onChange={handleChange}
-                value={form.image}
-                name="image"
-                type="text"
-              ></input>
-              <label htmlFor="temperaments">Temperament*</label>
-              <select
-                value={selectDefault}
-                name="temperaments"
-                onChange={handleChange}
-              >
-                <option value="DEFAULT" disabled hidden>
-                  Choose here
-                </option>
-                {temperaments.map((t) => (
-                  <option key={t.id}>{t.name}</option>
-                ))}
-              </select>
-              {form.temperaments.length ? (
-                <div className={classes["added-temperaments"]}>
-                  {form.temperaments.map((t) => (
-                    <p key={t} onClick={handleRemove}>
-                      {t}
-                    </p>
-                  ))}
-                </div>
-              ) : (
-                ""
-              )}
+            <div className={classes["form-container"]}>
+              <div className={classes["blank-left"]}></div>
+              <div className={classes.form}>
+                <label htmlFor="name">Name* </label>
+                <input
+                  autoComplete="off"
+                  onChange={handleChange}
+                  name="name"
+                  type="text"
+                  value={form.name}
+                ></input>
 
-              <button type="submit" disabled={!formIsValid}>
-                Submit
-              </button>
+                <label htmlFor="minHeight">Minimum Height: </label>
+                <input
+                  autoComplete="off"
+                  min="0"
+                  onChange={handleChange}
+                  value={form.minHeight}
+                  name="minHeight"
+                  type="number"
+                ></input>
+                <label htmlFor="maxHeight">Maximum Height* </label>
+                <input
+                  autoComplete="off"
+                  min="1"
+                  onChange={handleChange}
+                  value={form.maxHeight}
+                  name="maxHeight"
+                  type="number"
+                ></input>
+                <label htmlFor="weight">Weight* </label>
+                <input
+                  autoComplete="off"
+                  min="1"
+                  onChange={handleChange}
+                  value={form.weight}
+                  name="weight"
+                  type="number"
+                ></input>
+                <label htmlFor="life_span">Lifespan </label>
+                <input
+                  autoComplete="off"
+                  min="1"
+                  onChange={handleChange}
+                  value={form.life_span}
+                  name="life_span"
+                  type="number"
+                ></input>
+                <label htmlFor="image">Image URL </label>
+                <input
+                  autoComplete="off"
+                  onChange={handleChange}
+                  value={form.image}
+                  name="image"
+                  type="text"
+                ></input>
+                <label htmlFor="temperaments">Temperament*</label>
+                <select
+                  value={selectDefault}
+                  name="temperaments"
+                  onChange={handleChange}
+                >
+                  <option value="DEFAULT" disabled hidden>
+                    Choose here
+                  </option>
+                  {temperaments.map((t) => (
+                    <option key={t.id}>{t.name}</option>
+                  ))}
+                </select>
+                {form.temperaments.length ? (
+                  <div className={classes["added-temperaments"]}>
+                    {form.temperaments.map((t) => (
+                      <p key={t} onClick={handleRemove}>
+                        {t}
+                      </p>
+                    ))}
+                  </div>
+                ) : (
+                  ""
+                )}
+                <button type="submit" disabled={!formIsValid}>
+                  Submit
+                </button>
+              </div>
+              <div className={classes["blank-right"]}>
+                {form.name.length && didFocus.name && !formValidity.name ? (
+                  <p className={classes["invalid-name"]}>Name is invalid</p>
+                ) : (
+                  <p className={classes["hidden-name-warning"]}>
+                    Name is invalid {/*won't actually show, ever*/}
+                  </p>
+                )}
+                <p
+                  className={
+                    isTempWarning
+                      ? classes["invalid-length"]
+                      : classes["hidden-temp-warning"]
+                  }
+                >
+                  Limit reached
+                </p>
+              </div>
             </div>
           </form>
 
