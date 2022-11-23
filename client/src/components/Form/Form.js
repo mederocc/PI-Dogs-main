@@ -48,10 +48,7 @@ const Form = () => {
           // /\d/.test(e.target.value) checks true if target contains numbers
           // !/^[A-Za-z0-9 ]+$/.test(e.target.value) checks true if target contains special characters
 
-          if (
-            /\d/.test(e.target.value) ||
-            !/^[A-Za-z0-9 ]+$/.test(e.target.value)
-          ) {
+          if (!/^[a-z ,.'-]+$/i.test(e.target.value)) {
             setFormValidity((prevState) => ({ ...prevState, name: false }));
           } else {
             setFormValidity((prevState) => ({ ...prevState, name: true }));

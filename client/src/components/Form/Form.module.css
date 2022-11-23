@@ -134,3 +134,15 @@
 .form button:hover {
   background-color: aquamarine;
 }
+
+.form input:focus {
+  background-color: aquamarine;
+}
+
+.form select:focus {
+  background-color: aquamarine;
+}
+
+.form button:focus {
+  background-color: aquamarine;
+}
