@@ -24,7 +24,7 @@ const Detail = (props) => {
   return (
     <div className={classes.bg}>
       {isLoading ? (
-        <div className={classes.bg}>
+        <div>
           <div className={classes["title-container"]}>
             <div></div>
             <Link style={{ textDecoration: "none" }} to="/Home">
@@ -38,7 +38,7 @@ const Detail = (props) => {
         </div>
       ) : (
         detail.id && (
-          <div>
+          <>
             <div className={classes["title-container"]}>
               <div></div>
               <Link style={{ textDecoration: "none" }} to="/Home">
@@ -52,14 +52,14 @@ const Detail = (props) => {
                 src={detail.image.url ? detail.image.url : detail.image}
               />
               <div className={classes.info}>
-                <p>{detail.name}</p>
-                <p>{detail.height}</p>
-                <p>{detail.weight}</p>
+                <h1>{detail.name}</h1>
+                <p>{detail.height} cm</p>
+                <p>{detail.weight} kg</p>
                 <p>{detail.lifeSpan}</p>
                 <p>{detail.temperament}</p>
               </div>
             </div>
-          </div>
+          </>
         )
       )}
     </div>
