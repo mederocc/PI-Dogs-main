@@ -155,12 +155,13 @@ const Home = () => {
                 <option value="heaviest">Heaviest</option>
               </select>
             </div>
-            <div className={classes.temperament}>
+            <div>
               <label htmlFor="temperament" hidden>
                 Temperament
               </label>
 
               <select
+                className={classes.temperament}
                 value={selectDefault}
                 name="temperament"
                 onChange={(e) => {
@@ -180,12 +181,17 @@ const Home = () => {
         <div></div>
       </div>
 
-      {!allBreeds.length && !temperaments.length ? (
+      {!allBreeds.length ? (
         <img className={classes.loading} alt="loading" src={loadingDog} />
       ) : (
+        ""
+      )}
+      {allBreeds.length ? (
         <>
           <Cards allBreeds={currentPups} loading={isLoading} />
         </>
+      ) : (
+        ""
       )}
       {allBreeds.length > pupsPerPage ? (
         <Pagination

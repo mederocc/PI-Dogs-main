@@ -96,3 +96,7 @@
   position: relative;
   background-image: url("/Users/carlosmedero/Documents/HENRY/PI/PI-Dogs-main/client/src/components/utils/picture_bank/sand.jpg");
 }
+
+.temperament {
+  width: 11rem;
+}
