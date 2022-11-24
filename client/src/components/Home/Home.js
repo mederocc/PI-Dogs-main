@@ -181,17 +181,12 @@ const Home = () => {
         <div></div>
       </div>
 
-      {!allBreeds.length ? (
+      {!allBreeds.length && !temperaments.length ? (
         <img className={classes.loading} alt="loading" src={loadingDog} />
       ) : (
-        ""
-      )}
-      {allBreeds.length ? (
         <>
           <Cards allBreeds={currentPups} loading={isLoading} />
         </>
-      ) : (
-        ""
       )}
       {allBreeds.length > pupsPerPage ? (
         <Pagination

@@ -8,12 +8,14 @@ const Cards = ({ allBreeds, loading }) => {
   const [altMessage, setAltMessage] = useState("");
 
   useEffect(() => {
-    setAltMessage(
-      <div className={classes["alt-message"]}>
-        <p>No match was found. Try adding one!</p>
-        <img alt="missing dog" src={missingDog}></img>
-      </div>
-    );
+    setTimeout(() => {
+      setAltMessage(
+        <div className={classes["alt-message"]}>
+          <p>No match was found. Try adding one!</p>
+          <img alt="missing dog" src={missingDog}></img>
+        </div>
+      );
+    }, 1000);
   }, [allBreeds]);
 
   return (
