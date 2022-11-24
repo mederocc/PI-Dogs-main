@@ -15,12 +15,12 @@ const Form = () => {
   const [responseMessage, setResponseMessage] = useState("");
 
   const [isTempWarning, setIsTempWarning] = useState(false);
-  const [numberWarning, setNumberWarning] = useState({
-    minHeight: false,
-    maxHeight: false,
-    weight: false,
-    life_span: false,
-  });
+  // const [numberWarning, setNumberWarning] = useState({
+  //   minHeight: false,
+  //   maxHeight: false,
+  //   weight: false,
+  //   life_span: false,
+  // });
 
   const [form, setForm] = useState({
     name: "",
@@ -38,7 +38,7 @@ const Form = () => {
     maxHeight: false,
     weight: false,
     life_span: false,
-    image: false,
+    image: true,
     temperaments: false,
   });
 
@@ -59,7 +59,13 @@ const Form = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    setFormIsValid(!Object.values(formValidity).includes(false));
+    setFormIsValid(
+      !Object.values({
+        ...formValidity,
+        minHeight: true, // form should be valid regardless
+        life_span: true,
+      }).includes(false)
+    );
   }, [formValidity]);
 
   const handleChange = (e) => {
@@ -106,26 +112,29 @@ const Form = () => {
         setSelectDefault("DEFAULT");
         return;
 
+      case "image":
+        setForm({ ...form, [e.target.name]: e.target.value });
+
+        return;
+
       default:
+        setForm({ ...form, [e.target.name]: e.target.value });
         if (e.target.value.length) {
           if (!/^[0-9]*$/.test(e.target.value)) {
-            setNumberWarning((prevState) => ({
+            setFormValidity((prevState) => ({
               ...prevState,
-              [e.target.name]: true,
+              [e.target.name]: false,
             }));
+            return;
           }
-          setForm({ ...form, [e.target.name]: e.target.value });
           setFormValidity((prevState) => ({
             ...prevState,
             [e.target.name]: true,
           }));
+
           return;
         }
-        setNumberWarning((prevState) => ({
-          ...prevState,
-          [e.target.name]: false,
-        }));
-        setForm({ ...form, [e.target.name]: e.target.value });
+
         setFormValidity((prevState) => ({
           ...prevState,
           [e.target.name]: false,
@@ -311,22 +320,38 @@ const Form = () => {
                   </div>
                   <div>
                     <p>
-                      {numberWarning.minHeight ? "Value must be a number" : ""}
+                      {form.minHeight.length &&
+                      didFocus.minHeight &&
+                      !formValidity.minHeight
+                        ? "Value must be a number"
+                        : ""}
                     </p>
                   </div>
                   <div>
                     <p>
-                      {numberWarning.maxHeight ? "Value must be a number" : ""}
+                      {form.maxHeight.length &&
+                      didFocus.maxHeight &&
+                      !formValidity.maxHeight
+                        ? "Value must be a number"
+                        : ""}
                     </p>
                   </div>
                   <div>
                     <p>
-                      {numberWarning.weight ? "Value must be a number" : ""}
+                      {form.weight.length &&
+                      didFocus.weight &&
+                      !formValidity.weight
+                        ? "Value must be a number"
+                        : ""}
                     </p>
                   </div>
                   <div>
                     <p>
-                      {numberWarning.life_span ? "Value must be a number" : ""}
+                      {form.life_span.length &&
+                      didFocus.life_span &&
+                      !formValidity.life_span
+                        ? "Value must be a number"
+                        : ""}
                     </p>
                   </div>
                   <div></div>
