@@ -38,6 +38,7 @@ p {
   padding-bottom: 1%;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 3%;
+  height: 33rem;
 }
 
 .card-container:hover {

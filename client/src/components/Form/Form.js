@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Form = () => {
+  const defaultImg =
+    "https://www.dogstrust.ie/sponsor/_media/mystery-dog/133330dog-gallery.dog-profile-mobile-mystery-1.jpg";
   const dispatch = useDispatch();
   const temperaments = useSelector((state) => state.temperaments);
   const [selectDefault, setSelectDefault] = useState("DEFAULT");
@@ -13,6 +15,12 @@ const Form = () => {
   const [responseMessage, setResponseMessage] = useState("");
 
   const [isTempWarning, setIsTempWarning] = useState(false);
+  const [numberWarning, setNumberWarning] = useState({
+    minHeight: false,
+    maxHeight: false,
+    weight: false,
+    life_span: false,
+  });
 
   const [form, setForm] = useState({
     name: "",
@@ -100,6 +108,12 @@ const Form = () => {
 
       default:
         if (e.target.value.length) {
+          if (!/^[0-9]*$/.test(e.target.value)) {
+            setNumberWarning((prevState) => ({
+              ...prevState,
+              [e.target.name]: true,
+            }));
+          }
           setForm({ ...form, [e.target.name]: e.target.value });
           setFormValidity((prevState) => ({
             ...prevState,
@@ -107,6 +121,10 @@ const Form = () => {
           }));
           return;
         }
+        setNumberWarning((prevState) => ({
+          ...prevState,
+          [e.target.name]: false,
+        }));
         setForm({ ...form, [e.target.name]: e.target.value });
         setFormValidity((prevState) => ({
           ...prevState,
@@ -130,7 +148,7 @@ const Form = () => {
       life_span: `${form.life_span} years`,
       image: /(https?:\/\/.*\.(?:png|jpg|jpeg))/i.test(form.image)
         ? form.image
-        : "https://www.dogstrust.ie/sponsor/_media/mystery-dog/133330dog-gallery.dog-profile-mobile-mystery-1.jpg",
+        : defaultImg,
       temperament: form.temperaments,
     };
 
@@ -176,6 +194,11 @@ const Form = () => {
     }));
   };
 
+  const handleTempWarning = () => {
+    setIsTempWarning(false);
+    console.log(isTempWarning);
+  }; // More effecient handling???
+
   return (
     <div className={classes.bg}>
       <div className={classes["title-container"]}>
@@ -190,7 +213,10 @@ const Form = () => {
           <div className={classes.empty}></div>
 
           <form onSubmit={handleSubmit}>
-            <div className={classes["form-container"]}>
+            <div
+              onMouseMove={handleTempWarning}
+              className={classes["form-container"]}
+            >
               <div className={classes["blank-left"]}></div>
               <div className={classes.form}>
                 <label htmlFor="name">Name* </label>
@@ -209,7 +235,7 @@ const Form = () => {
                   onChange={handleChange}
                   value={form.minHeight}
                   name="minHeight"
-                  type="number"
+                  type="text"
                 ></input>
                 <label htmlFor="maxHeight">Maximum Height* </label>
                 <input
@@ -218,7 +244,7 @@ const Form = () => {
                   onChange={handleChange}
                   value={form.maxHeight}
                   name="maxHeight"
-                  type="number"
+                  type="text"
                 ></input>
                 <label htmlFor="weight">Weight* </label>
                 <input
@@ -227,7 +253,7 @@ const Form = () => {
                   onChange={handleChange}
                   value={form.weight}
                   name="weight"
-                  type="number"
+                  type="text"
                 ></input>
                 <label htmlFor="life_span">Lifespan </label>
                 <input
@@ -236,7 +262,7 @@ const Form = () => {
                   onChange={handleChange}
                   value={form.life_span}
                   name="life_span"
-                  type="number"
+                  type="text"
                 ></input>
                 <label htmlFor="image">Image URL </label>
                 <input
@@ -275,22 +301,37 @@ const Form = () => {
                 </button>
               </div>
               <div className={classes["blank-right"]}>
-                {form.name.length && didFocus.name && !formValidity.name ? (
-                  <p className={classes["invalid-name"]}>Name is invalid</p>
-                ) : (
-                  <p className={classes["hidden-name-warning"]}>
-                    Name is invalid {/*won't actually show, ever*/}
-                  </p>
-                )}
-                <p
-                  className={
-                    isTempWarning
-                      ? classes["invalid-length"]
-                      : classes["hidden-temp-warning"]
-                  }
-                >
-                  Limit reached
-                </p>
+                <div className={classes["error-box"]}>
+                  <div>
+                    {form.name.length && didFocus.name && !formValidity.name ? (
+                      <p>Name must contain letters only</p>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div>
+                    <p>
+                      {numberWarning.minHeight ? "Value must be a number" : ""}
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      {numberWarning.maxHeight ? "Value must be a number" : ""}
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      {numberWarning.weight ? "Value must be a number" : ""}
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      {numberWarning.life_span ? "Value must be a number" : ""}
+                    </p>
+                  </div>
+                  <div></div>
+                  <div>{isTempWarning && <p>6 temperaments tops!</p>}</div>
+                </div>
               </div>
             </div>
           </form>

@@ -26,8 +26,9 @@ const Cards = ({ allBreeds, loading }) => {
             ))}
           </div>
         ) : (
-          altMessage
+          ""
         )}
+        {!loading && !allBreeds.length ? altMessage : ""}
       </div>
     </div>
   );

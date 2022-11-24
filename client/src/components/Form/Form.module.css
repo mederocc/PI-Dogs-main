@@ -156,35 +156,26 @@
 }
 
 .blank-right {
+  width: 20rem;
+  margin-left: 1rem;
+}
+
+.error-box {
+  margin-top: 2.4rem;
+  margin-bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 20rem;
+  justify-content: safe;
+  height: 40rem;
 }
 
-.invalid-name {
-  margin-left: 1rem;
-  margin-top: 4.6rem;
-  font-weight: bold;
+.error-box div {
+  height: 1.94rem;
+  margin-top: 3rem;
 }
 
-.hidden-name-warning {
-  margin-left: 1rem;
-  margin-top: 4.6rem;
+.error-box div p {
+  padding: 0;
   font-weight: bold;
-  opacity: 0;
-}
-
-.invalid-length {
-  margin-left: 1rem;
-
-  margin-top: 26.8em;
-  font-weight: bold;
-}
-
-.hidden-temp-warning {
-  margin-left: 1rem;
-  margin-top: 26.8em;
-  font-weight: bold;
-  opacity: 0;
 }
