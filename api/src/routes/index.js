@@ -142,4 +142,21 @@ router.get("/temperaments", async (req, res) => {
   }
 });
 
+router.delete("/dogs/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedBreed = await Breed.findByPk(id);
+    if (!deletedBreed) {
+      throw new Error("Breed not found");
+    }
+    deletedBreed.destroy({ where: { id: id } }).then((result) => {
+      if (result) {
+        res.status(200).json("deleted!");
+      }
+    });
+  } catch (error) {
+    res.status(404).json(error.message);
+  }
+});
+
 module.exports = router;

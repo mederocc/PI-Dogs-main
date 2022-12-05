@@ -72,3 +72,29 @@
   margin-top: 9rem;
   width: 10rem;
 }
+
+.btn-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+
+  height: 100%;
+}
+
+.btn-container button {
+  border-radius: 7%;
+  margin-top: 2rem;
+}
+
+.delete-msg {
+  background-color: white;
+  opacity: 80%;
+  border-radius: 6%;
+  margin-top: 10rem;
+  font-weight: bold;
+}
+
+.delete-msg p {
+  color: black;
+  opacity: 100%;
+}

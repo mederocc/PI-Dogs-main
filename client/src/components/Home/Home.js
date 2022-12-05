@@ -78,6 +78,7 @@ const Home = () => {
     setIsLoading(true);
     dispatch(getFilters(source, e.target.value, sorting));
     dispatch(fetchBreedsFromAPI({ source, temp: e.target.value, sorting }));
+    setCurrentPage(1);
     setIsLoading(false);
   };
 
