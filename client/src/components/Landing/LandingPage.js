@@ -10,14 +10,14 @@ const LandingPage = () => {
       <div className={classes["title-container"]}>
         <div></div>
         <Link style={{ textDecoration: "none" }} to="/home">
-          <div className={classes["css-text-mask"]}>HENRY DOGS</div>{" "}
+          <div className={classes["css-text-mask"]}>HENRY DOGS</div>
         </Link>
         <div></div>
       </div>
 
       <div className={classes["btn-container"]}>
         <Link style={{ textDecoration: "none" }} to="/home">
-          <button className={classes["enter-btn"]}>ENTER SITE</button>{" "}
+          <button className={classes["enter-btn"]}>ENTER SITE</button>
         </Link>
       </div>
       <div className={classes["icon-container"]}>

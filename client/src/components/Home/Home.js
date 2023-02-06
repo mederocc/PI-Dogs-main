@@ -21,8 +21,18 @@ const Home = () => {
   const [selectDefault, setSelectDefault] = useState("DEFAULT");
   const { source, temp, sorting } = useSelector((state) => state.filters);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+
+  const [otraCosa, setOtraCosa] = useState(1);
   const pupsPerPage = 8;
+  const indexOfLastPup = otraCosa * pupsPerPage;
+  const indexOfFirstPup = indexOfLastPup - pupsPerPage;
+  const currentPups = allBreeds.slice(indexOfFirstPup, indexOfLastPup);
+
+  const paginate = (pageNumber) => setOtraCosa(pageNumber);
+
+  const paginatePrev = (prevPage) => setOtraCosa(prevPage);
+
+  const paginateNext = (nextPage) => setOtraCosa(nextPage);
 
   // const [sorting, setSorting] = useState("AtoZ");
   // const [temp, setTemp] = useState("all");
@@ -78,21 +88,11 @@ const Home = () => {
     setIsLoading(true);
     dispatch(getFilters(source, e.target.value, sorting));
     dispatch(fetchBreedsFromAPI({ source, temp: e.target.value, sorting }));
-    setCurrentPage(1);
+    setOtraCosa(1);
     setIsLoading(false);
   };
 
   // Get current dogs
-
-  const indexOfLastPup = currentPage * pupsPerPage;
-  const indexOfFirstPup = indexOfLastPup - pupsPerPage;
-  const currentPups = allBreeds.slice(indexOfFirstPup, indexOfLastPup);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  const paginatePrev = (prevPage) => setCurrentPage(prevPage);
-
-  const paginateNext = (nextPage) => setCurrentPage(nextPage);
 
   return (
     <div className={classes["bg-container"]}>
@@ -195,7 +195,7 @@ const Home = () => {
           totalPups={allBreeds.length}
           paginate={paginate}
           paginatePrev={paginatePrev}
-          currentPage={currentPage}
+          otraCosa={otraCosa}
           paginateNext={paginateNext}
         />
       ) : (
